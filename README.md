@@ -6,6 +6,17 @@ INI Parser (`ini_parser.lua`) is a modular utility to parse your INI files. It f
     - One example of this is added support for relative imports for `ini.parse`. It's not huge, just neat.
   - Good performance, being able to parse most files in 1 millisecond, and larger files in similar times.
 
+#### How does it work?
+- It will load your whole file into memory and recurse through it, line-by-line.
+- The cache checks to see if this line was processed before, if it was, return the results.
+- If it wasn't processed, each line is pressed against a key-value regex to extract the potential key and value.
+- The cache is checked to see if the same raw key or value was processed anywhere else in the file.
+- If it was, the cache returns the value, which avoids reprocessing things we've seen before.
+- If not, then we serialize the key/value, and store it in the cache.
+- After the key and value are serialized, we store this line in the cache and map it to the serialized key and value.
+
+This is a particuarly memory heavy operation, but that was the sacrifice to ensure good execution times. All the garbage is eventually cleaned up, and you can clean it up immediately by calling `collectgarbage()` after you parse your file.
+
 ## INI Parser Information
 - `function ini.parse(path, cwd)` — Parses an INI file @ cwd .. path ::
   - `cwd` is an optional parameter to define a CWD other than `2Take1Menu\\scripts\\`. It must be an absolute path.
