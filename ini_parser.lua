@@ -196,7 +196,7 @@ function ini.parse(path, cwd)
                             serialized_key = cache_key
                         else
                             serialized_key = serializeKey(key)
-                            cache.keys[serialized_key] = serialized_key
+                            cache.keys[key] = serialized_key
                         end
 
                         -- Check if the value has been cached:
