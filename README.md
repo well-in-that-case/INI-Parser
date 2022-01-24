@@ -27,6 +27,13 @@ This is a particuarly memory heavy operation, but that was the sacrifice to ensu
           - `_path` is an optional path to specify an alternative file to save as. It needs to be absolute.
           - `skip_keys` is an array of keys to not save.
 <br/><br/>
+- `function ini.match(path, key_name, desired_value)` — Match key_name=desired_value from the file @ `path`
+  - `path` specifies the path of the file.
+  - `key_name` specifies the key to match against.
+  - `desired_value` specifies the value to match against.
+  - **Returns:**
+      - A boolean indicating if "key_name"="desired_value".
+<br/><br/>
 - `function ini._Case_Ini_Recurse(tab, tab_name)` — [DEBUG]: Recursively prints the contents of a table ::
   - `tab` specifies the table to recurse upon.
   - `tab_name` is an optional parameter to specify the name of the table being recursed upon.
